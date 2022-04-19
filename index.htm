@@ -1,0 +1,249 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://cdn.jsdelivr.net/npm/jdenticon@3.1.1/dist/jdenticon.min.js" async
+        integrity="sha384-l0/0sn63N3mskDgRYJZA6Mogihu0VY3CusdLMiwpJ9LFPklOARUcOiWEIGGmFELx"
+        crossorigin="anonymous">
+</script>
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.3/css/all.css" integrity="sha384-SZXxX4whJ79/gErwcOYf+zWLeJdY/qpuqC4cAa9rOGUstPomtqpuNWT9wdPEn2fk" crossorigin="anonymous">
+<link rel="stylesheet" href="style.css">
+<script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
+<script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
+<script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-firestore.js"></script>
+<script src="./firebase.js"></script>
+<script src="./script.js"></script>
+
+</head>
+<body>
+  <div class="bg-white w-full">
+      <div class="header h-16 bg-gray-900 flex items-center">
+          <div class="logo w-1/5 h-16">
+              <img class="w-28 h-16 object-contain ml-10" src="https://www.pinclipart.com/picdir/big/57-576184_view-our-amazon-storefront-amazon-logo-white-png.png">
+          </div>
+          <input class="h-9 w-30 bg-gray-800 border border-gray-500 border-opacity-75 placeholder-white rounded-l-xl px-3 text-white ml-6 focus: outline-none" id="search" type="text" placeholder="Search...">
+          <div class="categories h-9 w-30 text-sm bg-gray-800 border border-opacity-75 border-gray-500 text-white flex items-center px-3">categories
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 ml-3 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+              </svg>
+          </div>
+          <div class="search-icon h-9 w-10 rounded-r-xl text-white flex justify-center items-center bg-yellow-500">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+              </svg>
+          </div>
+
+          <div class="icons text-white flex items-center ml-auto mr-8 w-48 h-16 justify-around">
+            <svg class="h-4 w-4" xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" />
+              </svg>
+              <a href="cart.htm">
+              <div class="cart-icon relative h-10 w-10 bg-yellow-500 justify-center items-center flex rounded-xl">
+                  <div class="cart-item-number absolute -top-1 -right-1 text-gray-800 text-xs h-4 w-4 bg-white rounded-full flex justify-center items-center">2</div>
+                <svg class="h-4 w-4 text-gray-600" xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z" />
+                  </svg>
+              </div>
+            </a>
+              <svg class="h-4 w-4" xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9" />
+              </svg>
+              <svg class="h-12 w-12" data-jdenticon-value="Michal"></svg>
+          </div>
+      </div>
+      <div class="main h-screen flex">
+          <div class="sidebar w-1/5 border-gray-700 border-t-2 h-full bg-gray-900 p-6 ">
+            <div class="sidebar-categorys">
+                <div class="text-yellow-500 flex p-2 bg-gray-700 rounded-lg font-bold cursor-poiner">
+                   <span class="w-8">
+                       <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2V6zM14 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2V6zM4 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2v-2zM14 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2v-2z" />
+                      </svg>
+                      </span> 
+                      <span>Categories</span>
+                </div>
+                <div class="sidebar-main-category mb-2 p-2 text-white cursor-poiner font-bolt flex">
+                    <span class="w-8"></span>
+                    <span>Echo and Alexa</span>
+                </div>
+                <div class="sidebar-main-category mb-2 p-2 text-white cursor-poiner font-bolt flex">
+                    <span class="w-8"></span>
+                    <span>Kindle</span>
+                </div>
+                <div class="sidebar-main-category mb-2 p-2 text-white cursor-poiner font-bolt flex">
+                    <span class="w-8"></span>
+                    <span>Books</span>
+                </div>
+                <div class="sidebar-main-category mb-2 p-2 text-white cursor-poiner font-bolt flex">
+                    <span class="w-8"></span>
+                    <span>Electornics</span>
+                </div>
+                <div class="sidebar-main-category mb-2 p-2 text-white cursor-poiner font-bolt flex">
+                    <span class="w-8"></span>
+                    <span>Home and garden</span>
+                </div>
+                <div class="sidebar-main-category mb-4 p-2 hover:bg-gray-700 rounded-xl text-white cursor-poiner font-bolt flex">
+                    <span class="w-8">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z" />
+                          </svg>                    </span>
+                    <span>Sell on Amazon</span>
+                </div>
+                <div class="sidebar-main-category mb-2 p-2 hover:bg-gray-700 rounded-xl text-white cursor-poiner font-bolt flex">
+                    <span class="w-8">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 15l-2 5L9 9l11 4-5 2zm0 0l5 5M7.188 2.239l.777 2.897M5.136 7.965l-2.898-.777M13.95 4.05l-2.122 2.122m-5.657 5.656l-2.12 2.122" />
+                          </svg>
+                    </span>
+                    <span>Help</span>
+                </div>
+            </div>
+          </div>
+          <div class="main-section flex-1 p-6 bg-gray-100">
+              <div class="main-section-baner flex items-end h-44 w-full rounded-lg">
+                  <div class="btn bg-white w-36 h-10 mb-4 rounded-full flex justify-center items-center ml-4 cursor-pointer">
+                      <h4 class="text-bold text-yellow-500">Browse products</h4>
+                  </div> 
+              </div>
+              <div class="main-section-categories mt-10 ">
+                  <h1 class="popular-categories font-bold flex items-center text-gray-700 text-2xl">Popular categorys 
+                  <svg class="h-6 w-6 text-yellow-400" xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+                    <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
+                  </svg>
+                </h1>
+                <div class="categories flex mt-5">
+                    <div class="icon-desktop flex justify-center items-center h-20 w-20 bg-white rounded-xl">
+                        <svg class="h-12 w-12 text-gray-500" xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+                          </svg> 
+                    </div>
+                    <div class="icon-gift flex ml-4 justify-center items-center h-20 w-20 bg-white rounded-xl">
+                        <svg class="h-12 w-12 text-gray-500" xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v13m0-13V6a2 2 0 112 2h-2zm0 0V5.5A2.5 2.5 0 109.5 8H12zm-7 4h14M5 12a2 2 0 110-4h14a2 2 0 110 4M5 12v7a2 2 0 002 2h10a2 2 0 002-2v-7" />
+                          </svg>
+                    </div>
+                    <div class="icon-gift flex ml-4 justify-center items-center h-20 w-20 bg-white rounded-xl">
+                        <svg class="h-12 w-12 text-gray-500" xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 18h.01M8 21h8a2 2 0 002-2V5a2 2 0 00-2-2H8a2 2 0 00-2 2v14a2 2 0 002 2z" />
+                          </svg>
+                    </div>
+                    <div class="icon-gift flex ml-4 justify-center items-center h-20 w-20 bg-white rounded-xl">
+                        <svg class="h-12 w-12 text-gray-500" xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" />
+                          </svg>
+                    </div>
+                    <div class="icon-gift flex ml-4 justify-center items-center h-20 w-20 bg-white rounded-xl">
+                        <svg class="h-12 w-12 text-gray-500" xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 9a2 2 0 012-2h.93a2 2 0 001.664-.89l.812-1.22A2 2 0 0110.07 4h3.86a2 2 0 011.664.89l.812 1.22A2 2 0 0018.07 7H19a2 2 0 012 2v9a2 2 0 01-2 2H5a2 2 0 01-2-2V9z" />
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 13a3 3 0 11-6 0 3 3 0 016 0z" />
+                          </svg>
+                    </div>
+                    <div class="icon-gift flex ml-4 justify-center items-center h-20 w-20 bg-white rounded-xl">
+                        <svg class="h-12 w-12 text-gray-500" xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6" />
+                          </svg>
+                    </div>
+                    <div class="icon-gift flex ml-4 justify-center items-center h-20 w-20 bg-white rounded-xl">
+                        <svg class="h-12 w-12 text-gray-500" xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19V6l12-3v13M9 19c0 1.105-1.343 2-3 2s-3-.895-3-2 1.343-2 3-2 3 .895 3 2zm12-3c0 1.105-1.343 2-3 2s-3-.895-3-2 1.343-2 3-2 3 .895 3 2zM9 10l12-3" />
+                          </svg>
+                    </div>
+                    <div class="icon-gift flex ml-4 justify-center items-center h-20 w-20 bg-white rounded-xl">
+                        <svg class="h-12 w-12 text-gray-500" xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z" />
+                          </svg>
+                    </div>
+                </div>
+              </div>
+              <div class="main-section-deals mt-10">
+                  <h1 class="text-2xl font-bold text-gray-700">Hot deals 🔥</h1>
+                  <div class="main-section-products flex">
+                      <div class="main-product">
+                          <div class="product-image w-48 h-52 mt-5 rounded-lg bg-white">
+                              <img class="w-full h-full object-contain p-4" src="https://cdn.x-kom.pl/i/setup/images/prod/big/product-new-big,,2019/8/pr_2019_8_28_14_59_52_23_01.jpg">
+                          </div>
+                          <div class="product-name text-gray-700 font-bold mt-2 text-sm">
+                              Nintendo Switch(2019)
+                          </div>
+                          <div class="product-make text-green-700 font-bold">
+                              Nintendo
+                          </div>
+                          <div class="product-rating text-yellow-300 font bold my-1">
+                            ⭐️⭐️⭐️⭐️ 4
+                          </div>
+                          <div class="product-price font-bold text-gray-700 text-lg">
+                              290.00$
+                          </div>
+                          <div class="add-to-cart h-8 cursor-pointer hover:bg-yellow-600 w-28 bg-yellow-500 flex items-center justify-center rounded text-white">Add to cart
+
+                        </div>
+                      </div>
+                      <div class="main-product ml-4">
+                        <div class="product-image w-48 h-52 mt-5 rounded-lg bg-white">
+                            <img class="w-full h-full object-contain p-4" src="https://a.allegroimg.com/original/111c98/e5d2c60f45bea85f7107783530ad/Apple-MacBook-Pro-13-M1-16GB-256-Mac-OS">
+                        </div>
+                        <div class="product-name text-gray-700 font-bold mt-2 text-sm">
+                            MacBook Pro
+                        </div>
+                        <div class="product-make text-green-700 font-bold">
+                            Macbook
+                        </div>
+                        <div class="product-rating text-yellow-300 font bold my-1">
+                          ⭐️⭐️⭐️⭐️⭐️ 5
+                        </div>
+                        <div class="product-price font-bold text-gray-700 text-lg">
+                            3290.00$
+                        </div>
+                        <div class="add-to-cart h-8 cursor-pointer hover:bg-yellow-600 w-28 bg-yellow-500 flex items-center justify-center rounded text-white">Add to cart
+
+                        </div>
+                    </div>
+                    <div class="main-product ml-4">
+                        <div class="product-image w-48 h-52 mt-5 rounded-lg bg-white">
+                            <img class="w-full h-full object-contain p-4" src="data:image/jpeg;base64,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">
+                        </div>
+                        <div class="product-name text-gray-700 font-bold mt-2 text-sm">
+                            Iphone 11 Pro
+                        </div>
+                        <div class="product-make text-green-700 font-bold">
+                            Iphone
+                        </div>
+                        <div class="product-rating text-yellow-300 font bold my-1">
+                          ⭐️⭐️⭐️⭐️ 4
+                        </div>
+                        <div class="product-price font-bold text-gray-700 text-lg">
+                            490.00$
+                        </div>
+                        <div class="add-to-cart h-8 cursor-pointer hover:bg-yellow-600 w-28 bg-yellow-500 flex items-center justify-center rounded text-white">Add to cart
+
+                        </div>
+                    </div>
+                    <div class="main-product ml-4">
+                        <div class="product-image w-48 h-52 mt-5 rounded-lg bg-white">
+                            <img class="w-full h-full object-contain p-4" src="https://fotoplus.pl/www/images/produkty/large/panasonic-g100-12-32-35-100-skos.jpg">
+                        </div>
+                        <div class="product-name text-gray-700 font-bold mt-2 text-sm">
+                            Lumix G100
+                        </div>
+                        <div class="product-make text-green-700 font-bold">
+                            Camera
+                        </div>
+                        <div class="product-rating text-yellow-300 font bold my-1">
+                          ⭐️⭐️⭐️⭐️ 4
+                        </div>
+                        <div class="product-price font-bold text-gray-700 text-lg">
+                            1990.00$
+                        </div>
+                        <div class="add-to-cart h-8 cursor-pointer hover:bg-yellow-600 w-28 bg-yellow-500 flex items-center justify-center rounded text-white">Add to cart
+
+                        </div>
+                    </div>
+                  </div>
+              </div>
+          </div>
+      </div>
+  </div>
+</body>
+</html>
